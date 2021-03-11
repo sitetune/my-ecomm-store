@@ -18,6 +18,7 @@ export default function Home() {
         <h1 className={styles.title}>
           Welcome to <a href="https://misterart.kids">MisterArt.kids</a>
         </h1>
+        
 
         {/* <p className={styles.description}>
           Get started by editing{' '}
