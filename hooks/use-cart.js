@@ -20,7 +20,7 @@ export function useCartState() {
     if ( data ) {
       updateCart(data);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     const data = JSON.stringify(cart);
@@ -37,11 +37,11 @@ export function useCartState() {
 
   const subtotal = cartItems.reduce ((accumulator, { pricePerItem, quantity}) => {
     return accumulator + ( pricePerItem * quantity)
-  }, 0)
+  }, 0);
   
   const totalItems = cartItems.reduce ((accumulator, { pricePerItem, quantity}) => {
     return accumulator + quantity
-  }, 0)
+  }, 0);
 
   console.log('subtotal', subtotal);
 
@@ -67,6 +67,19 @@ export function useCartState() {
     })
   }
 
+  function updateItem({ id, quantity}) {
+
+    updateCart((prev) => {
+      let cart = {...prev};
+  
+      if ( cart.products[id]) {
+        cart.products[id].quantity = quantity;
+      }
+      
+      return cart;
+    })
+  }
+
   function checkout() {
     initiateCheckout({
       lineItems: cartItems.map(item => {
@@ -80,10 +93,12 @@ export function useCartState() {
 
   return {
     cart,
+    cartItems,
     updateCart,
     subtotal,
     totalItems,
     addToCart,
+    updateItem,
     checkout
   }
 }
@@ -92,3 +107,4 @@ export function useCart() {
   const cart = useContext(CartContext);
   return cart;
 }
+

@@ -2,8 +2,11 @@ import { FaShoppingCart } from 'react-icons/fa';
 
 import { useCart } from '../../hooks/use-cart.js';
 
+import Link from 'next/link';
+
 import styles from './Nav.module.css';
 import { CartContext } from '../../hooks/use-cart';
+import React from 'react';
 
 const Nav = () => {
   const { subtotal, checkout } = useCart();
@@ -17,12 +20,14 @@ const Nav = () => {
   return (
     <nav className={styles.nav}>
       <p className={styles.navTitle}>
-        <img src="/images/ma_logo.png" alt="MisterArt.com Kids!" className={styles.logo} />
+        <Link href="/">
+          <a><img src="/images/ma_logo.png" alt="MisterArt.com Kids!" className={styles.logo} /></a>
+        </Link>
       </p>
       <p className={styles.navCart}>
-        <button onClick={checkout}>
-          <FaShoppingCart /> ${ subtotal }
-        </button>
+        <Link href="/cart">
+          <a><FaShoppingCart /> ${ subtotal }</a>
+        </Link>
       </p>
     </nav>
   )
