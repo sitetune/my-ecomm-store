@@ -1,12 +1,22 @@
-import Head from 'next/head'
+import { useState } from 'react';
+import Head from 'next/head';
+import Link from 'next/link';
+import { FaShoppingCart } from 'react-icons/fa';
 import styles from '../styles/Home.module.css'
 
-import { initiateCheckout } from '../lib/payments.js';
-import products from '../products.json'
+import { useCart } from '../hooks/use-cart.js';
+
+import products from '../products.json';
+
+
 
 export default function Home() {
-  console.log('NEXT_PUBLIC_STRIPE_API_KEY', process.env.NEXT_PUBLIC_STRIPE_API_KEY);
-  // console.log('products', products);
+
+  const { subtotal, totalItems, addToCart, checkout } = useCart();
+  
+
+  
+
   return (
     <div className={styles.container}>
       <Head>
@@ -16,14 +26,10 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://misterart.kids">MisterArt.kids</a>
+          The coolest place for kids!
         </h1>
-        
 
-        {/* <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p> */}
+        
 
         <ul className={styles.grid}>
           {products.map(product => {
@@ -32,23 +38,23 @@ export default function Home() {
             return (
               
               <li key={id} className={styles.card}>
-                <a href="#">
-                  <img src={ image } alt={ title }></img>
-                  <h3>{ title }</h3>
-                  <p>${ price }</p>
-                  <p>{ description }</p>
-                </a>
+                <Link href={`/products/${id}`}>
+                  <a>
+                    <img src={ image } alt={ title }></img>
+                    <h3>{ title }</h3>
+                    <p>{ description }</p>
+                    <p className={ styles.price }>${ price }</p>
+                  </a>
+                </Link>
                 <p>
-                  <button className={styles.button} onClick={() => { initiateCheckout({
-                    lineItems: [
-                      {
-                        price: id,
-                        quantity: 1
-                      }
-                    ]
-                  });
+                  <button className={styles.button} onClick={() => {
+                    addToCart({
+                      id
+                    }) 
+                    
+                  
                   }} >
-                    Buy Now
+                    Add to Cart
                   </button>
                 </p>
               </li>
