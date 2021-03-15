@@ -36,6 +36,12 @@ export function useCartState() {
   });
 
   const subtotal = cartItems.reduce ((accumulator, { pricePerItem, quantity}) => {
+    const formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2
+    });
+
     return accumulator + ( pricePerItem * quantity)
   }, 0);
   
@@ -43,11 +49,11 @@ export function useCartState() {
     return accumulator + quantity
   }, 0);
 
-  console.log('subtotal', subtotal);
+  // console.log('subtotal', subtotal);
 
-  console.log('cartItems', cartItems);
+  // console.log('cartItems', cartItems);
 
-  console.log('cart', cart);
+  // console.log('cart', cart);
 
   function addToCart({ id } = {}) {
     updateCart(prev => {
