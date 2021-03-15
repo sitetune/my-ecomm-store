@@ -26,7 +26,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          The coolest place for kids!
+          The Original Art Supply Superstore
         </h1>
 
         
@@ -64,14 +64,8 @@ export default function Home() {
       </main>
 
       <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
+      This is a demo site for - 
+        <Link href={`https://www.misterart.com`}><a>MisterArt.com</a></Link>
       </footer>
     </div>
   )
